@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人介绍</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            width: 30%;
+            padding: 10px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>你好，这是我的个人工具网站</h1>
+        <p>我收集制作了一些小工具，为了方便使用，我把他们整理重写放在这个网页中。</p>
+        <h2>介绍</h2>
+        <ul>
+            <li>简单计算器：我自己编写的计算器，练手用</li>
+            <li>图种制作器：将压缩包伪装图片，最初是bat文件，js重写</li>
+            <li>心率显示器：通过小米手环的广播功能把心率投屏到网页上</li>
+        </ul>
+        <h2>致谢</h2>
+        <p>部分工具来自GitHub,工具内有写出</p>
+        <div class="button-container">
+            <div class="button-row">
+                <a href="calculator.html" class="button">简单计算器</a>
+                <a href="picseed.html" class="button">图种制作器</a>
+                <a href="heart/index.html" class="button">心率显示器</a>
+            </div>
+            <div class="button-row">
+                <a href="#" class="button">待完善</a>
+                <a href="wytk.html" class="button">幻影坦克</a>
+                <a href="#" class="button">待完善</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

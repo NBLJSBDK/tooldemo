@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图种制作器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('background1.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        label {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>图种制作器</h1>
+        <p>通过选择图片和压缩包文件，合成一个新的图种文件。</p>
+        <label for="imagefile" id="imagefile-label">选择图片</label>
+        <input type="file" id="imagefile" accept="image/*">
+        <label for="zipfile" id="zipfile-label">选择压缩包</label>
+        <input type="file" id="zipfile" accept=".zip">
+        <div class="result" id="result"></div>
+        <a href="index.html" class="button">返回首页</a>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script>
+        document.getElementById('imagefile').addEventListener('change', handleFiles);
+        document.getElementById('zipfile').addEventListener('change', handleFiles);
+
+        function handleFiles() {
+            const imagefile = document.getElementById('imagefile').files[0];
+            const zipfile = document.getElementById('zipfile').files[0];
+
+            if (imagefile) {
+                document.getElementById('imagefile-label').innerText = '已选择图片';
+            }
+            if (zipfile) {
+                document.getElementById('zipfile-label').innerText = '已选择压缩包';
+            }
+
+            if (imagefile && zipfile) {
+                const reader1 = new FileReader();
+                const reader2 = new FileReader();
+
+                reader1.onload = function(e1) {
+                    const imageData = e1.target.result;
+                    reader2.onload = function(e2) {
+                        const zipData = e2.target.result;
+
+                        const zip = new JSZip();
+                        zip.file(imagefile.name, imageData);
+                        zip.loadAsync(zipData)
+                            .then(function(contents) {
+                                return zip.generateAsync({ type: "blob" });
+                            })
+                            .then(function(content) {
+                                const url = URL.createObjectURL(content);
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.download = 'combined.jpg';
+                                a.textContent = '下载合成文件';
+                                document.getElementById('result').appendChild(a);
+                            });
+                    };
+                    reader2.readAsArrayBuffer(zipfile);
+                };
+                reader1.readAsArrayBuffer(imagefile);
+            }
+        }
+    </script>
+</body>
+</html>

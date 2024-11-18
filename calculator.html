@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* 将背景色修改为背景图片 */
+            background-image: url('background1.jpg');
+            background-size: cover; /* 让图片覆盖整个背景 */
+            background-position: center; /* 使图片居中 */
+            margin: 0;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .return-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="calculator">
+        <h2>简单计算器</h2>
+        <input type="number" id="num1" placeholder="输入第一个数">
+        <input type="number" id="num2" placeholder="输入第二个数"><br>
+        <button onclick="calculate('add')">加法</button>
+        <button onclick="calculate('subtract')">减法</button>
+        <button onclick="calculate('multiply')">乘法</button>
+        <button onclick="calculate('divide')">除法</button>
+        <h3>结果: <span id="result"></span></h3>
+        <a href="index.html" class="return-button">返回主页</a>
+    </div>
+    <script>
+        function calculate(operation) {
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var result;
+            if (isNaN(num1) || isNaN(num2)) {
+                result = '请输入有效的数字';
+            } else {
+                if (operation === 'add') {
+                    result = num1 + num2;
+                } else if (operation === 'subtract') {
+                    result = num1 - num2;
+                } else if (operation === 'multiply') {
+                    result = num1 * num2;
+                } else if (operation === 'divide') {
+                    if (num2 !== 0) {
+                        result = num1 / num2;
+                    } else {
+                        result = '除数不能为零';
+                    }
+                }
+            }
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
